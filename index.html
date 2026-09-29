@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Smart Agri-Box Monitor</title>
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Main Mobile Screen Container -->
+    <div class="app-container">
+
+        <!-- App Header -->
+        <div class="app-header">
+            <div class="header-title-wrap">
+                <div class="box-badge">Agri-Box Chamber</div>
+                <h1 class="app-title">Environment Monitor</h1>
+            </div>
+        </div>
+
+        <!-- Primary Box Temperature & Status Hero Card -->
+        <div class="hero-banner is-stabilized" id="hero-banner">
+            <div class="hero-top-row">
+                <span class="hero-title">Inside Box Temperature</span>
+                <span class="status-pill stabilized" id="cooling-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round" id="badge-icon">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span id="cooling-badge-text">Normal</span>
+                </span>
+            </div>
+
+            <div class="hero-main-row">
+                <div class="temp-readout-wrap">
+                    <div class="big-temp">
+                        <span id="live-temp">24.2</span>
+                        <span class="temp-unit">°C</span>
+                    </div>
+                    <div class="hero-subtext" id="status-text">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 14 14"></polyline>
+                        </svg>
+                        <span id="status-message">Temperature is good • Box is stable</span>
+                    </div>
+                </div>
+
+                <!-- Animated Fan Unit -->
+                <div class="fan-container" id="fan-visual" title="Cooling Fan Status">
+                    <svg class="fan-svg" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="2.5" fill="currentColor"></circle>
+                        <path d="M12 9.5C12 5.5 14 3 16 3c1 0 1.5 1 1.5 2 0 3-2.5 4.5-5.5 4.5z"></path>
+                        <path d="M14.5 12c4 0 6.5 2 6.5 4 0 1-1 1.5-2 1.5-3 0-4.5-2.5-4.5-5.5z"></path>
+                        <path d="M12 14.5c0 4-2 6.5-4 6.5-1 0-1.5-1-1.5-2 0-3 2.5-4.5 5.5-4.5z"></path>
+                        <path d="M9.5 12c-4 0-6.5-2-6.5-4 0-1 1-1.5 2-1.5 3 0 4.5 2.5 4.5 5.5z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two Metric Cards -->
+        <div class="stats-grid">
+            <!-- Temperature Card -->
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-label">Temperature</span>
+                    <div class="stat-icon temp">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-value" id="card-temp">24.2°C</div>
+                <div class="stat-footer">
+                    <span>Target: Below </span><b style="color: var(--accent-blue);">25.0°C</b>
+                </div>
+            </div>
+
+            <!-- Humidity Card -->
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-label">Air Humidity</span>
+                    <div class="stat-icon hum">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-value" id="live-hum">68.5%</div>
+                <div class="stat-footer" id="hum-status">
+                    <span style="color: var(--accent-green);">● Good Moisture</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Automatic Temperature Control -->
+        <div class="control-box">
+            <div class="control-head">
+                <div class="control-icon-pill">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="2" x2="12" y2="22"></line>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M4.93 4.93l14.14 14.14"></path>
+                        <path d="M19.07 4.93L4.93 19.07"></path>
+                    </svg>
+                </div>
+                <div>
+                    <div class="control-title-main">Automatic Cooling</div>
+                    <div class="control-subtitle" id="auto-mode-text">Turns on fan when box gets too hot</div>
+                </div>
+            </div>
+
+            <div class="threshold-strip">
+                <div class="strip-text">
+                    <span class="strip-title">Cooling Starts Above</span>
+                    <span class="strip-sub">Stops when cooled back down</span>
+                </div>
+                <div class="strip-badge">25.0°C</div>
+            </div>
+
+            <div class="switches-row">
+                <div class="toggle-item">
+                    <div class="toggle-text">
+                        <span class="toggle-label">Auto Mode</span>
+                        <span class="toggle-sub">Smart Control</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="auto-switch" checked>
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-item">
+                    <div class="toggle-text">
+                        <span class="toggle-label">Exhaust Fan</span>
+                        <span class="toggle-sub" id="fan-relay-text">Standby</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="fan-switch">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box Status & Connections -->
+        <div class="status-card">
+            <div class="status-card-title">
+                <span>System Status</span>
+                <span style="color: var(--accent-green); font-size: 11px;">Active</span>
+            </div>
+
+            <div class="status-line">
+                <span class="status-line-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                    Sensors
+                </span>
+                <span class="status-line-val ok" id="sensor-status">Working Normally</span>
+            </div>
+
+            <div class="status-line">
+                <span class="status-line-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+                    </svg>
+                    Cloud Connection
+                </span>
+                <span class="status-line-val ok" id="cloud-status">Connecting...</span>
+            </div>
+        </div>
+
+        <!-- Storage Preservation Status Card -->
+        <div class="preservation-card">
+            <div class="card-head-row">
+                <div class="card-title-group">
+                    <span class="card-title-main">Storage Preservation</span>
+                    <span class="card-title-sub">Crop Freshness Tracking</span>
+                </div>
+                <span class="preservation-badge optimal" id="spoilage-badge">Optimal</span>
+            </div>
+
+            <div class="preservation-metrics">
+                <div class="metric-block">
+                    <span class="metric-sub">Estimated Shelf Life</span>
+                    <span class="metric-val" id="time-to-spoil">24.0 <small>Hours</small></span>
+                </div>
+                <div class="metric-block align-right">
+                    <span class="metric-sub">Preservation Score</span>
+                    <span class="metric-val highlight" id="preservation-score">98%</span>
+                </div>
+            </div>
+
+            <div class="progress-bar-wrap">
+                <div class="progress-fill" id="preservation-progress" style="width: 98%;"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="app.js"></script>
+</body>
+
+</html>
